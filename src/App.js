@@ -1,85 +1,17 @@
-// import './App.css';
-// import Header from "./Header"
-// import Slider from './slider';
 
-// function App() {
-//   const creepArray = [
-//     {
-//       name :"كريب نوتيلا",
-//       img: "pics/crip/nutella.jpg",
-//       price: "4500",
-//       discption:"عجينة الكريب مع النوتيلا"
-//     },{
-//       name :"بنانا رول",
-//       img: "pics/crip/bananarool.jpg",
-//       price: "5000",
-//       discption:"عجينة الكريب محشية بفاكهة الموز"
-//     },{
-//       name :"بار لورد كريب",
-//       img: "pics/crip/barlord.jpg",
-//       price: "8000",
-//       discption:"عجينة الكريب مع كيكه البراوني والفاكهة ونستلة مقطعه بداخله وياتي بثلاث  نكهات مختلفة"
-//     },{
-//       name :"بوم كريب",
-//       img: "pics/crip/boom.jpg",
-//       price: "7000",
-//       discption:"عجينة الكريب مع البراوني والموز نستلة مقطعه بداخلة وايس كريم"
-//     },{
-//       name :"كريب فواكه",
-//       img: "pics/crip/frute.jpg",
-//       price: "6000",
-//       discption:" عجينة الكريب مع النوتيلا والفواكه " 
-//     },{
-//       name :"كريب لوتس",
-//       img: "pics/crip/lots.jpg",
-//       price: "5000",
-//       discption:"عجينة الكريب مع زبدة اللوتس"
-//     },{
-//       name :"كريب مكس",
-//       img: "pics/crip/mix.jpg",
-//       price: "5500",
-//       discption:"عجينة الكريب بثلاث نكهات مختلفة"
-//     },{
-//       name :"كريب مكسرات",
-//       img: "pics/crip/muksrat.jpg",
-//       price: "6500",
-//       discption:"عجينة الكريب مع النوتيلا والمكسرات والفاكهة "
-//     },{
-//       name :"كريب اوريو",
-//       img: "pics/crip/oriocrep.jpg",
-//       price: "5000",
-//       discption:"عجينة الكريب مع النوتيلا وبسكت الاوريو المطحون"
-//     },{
-//       name :"كريب بستاشيو",
-//       img: "pics/crip/pistashio.jpg",
-//       price: "5000",
-//       discption:"عجينة الكريب مع زبدة الفستق الحلبي "
-//     },{
-//       name :"سوشي كريب",
-//       img: "pics/crip/soshi.jpg",
-//       price: "5000",
-//       discption:"عجينة الكريب مع الموز والنوتلا"
-//     },{
-//       name :"كريب سبشل",
-//       img: "pics/crip/spashil.jpg",
-//       price: "5000",
-//       discption:"عجينة الكريب بنكهتين مختلفتين"
-//     }
-//   ]
-//   return (
-//     <>
-//       <Header/>
-//       <Slider arry= {creepArray}  />
-//     </>
-//   );
-// }
-
-// export default App;
 import './App.css';
 import Header from "./Header";
 import CreepSlider from './CreepSlider';  // تغيير اسم المكون لتجنب التعارض
 
+import {useState} from 'react';
+import NightlightIcon from '@mui/icons-material/Nightlight';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+
 function App() {
+  const [nightMood,setNightMood] = useState(false);
+  function changeMood(){
+    setNightMood(!nightMood)
+}
   const creepArray = [
         {
           name :"كريب نوتيلا",
@@ -146,7 +78,7 @@ function App() {
   const hormonArray = [
     {
       name :"هرمون نوتيلا",
-      img: "pics/hrmon/nutellah.jpg",
+      img:  "pics/hrmon/nutellah.jpg",
       price: "5500",
       discption:"كوب من البراوني والايسكريم بالفاكهة وقطع من البان كيك بالنوتيلا"
     },
@@ -443,7 +375,9 @@ function App() {
   ]
 
   return (
-    <>
+    <div style={{ background: nightMood ? "#232323" : "#e9e9e9" , color: !nightMood ? "#232323" : "#e9e9e9", transition: "0.5s ease-out" }}>
+
+    <button  style={{ background: !nightMood ? "#232323" : "#e9e9e9", color: nightMood ? "#232323" : "#e9e9e9" }} className='mood-btn'onClick={changeMood}>{nightMood?<WbSunnyIcon/> : <NightlightIcon/> }</button>
       <Header/>
       <CreepSlider sect="الكريب" arry={creepArray} />
 
@@ -462,7 +396,7 @@ function App() {
       <CreepSlider sect="الايس كريم" arry={iceCreamArray} />
 
       <CreepSlider sect="الموهيتو" arry={mohitoArray} />
-    </>
+    </div>
   );
 }
 
